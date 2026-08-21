@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Espace formateur — IOBSP Niveau 2</title>
+<style>
+  :root{
+    --prune:#8C1E70; --prune-fonce:#5E1349; --prune-clair:#F4E6EE;
+    --accent:#C77BAA; --gris:#3C3C3C; --gris-moyen:#8A7A85;
+    --trame:#E8DCE5; --fond:#FAF6F8; --blanc:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--fond);color:var(--gris);
+       font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.55;}
+
+  header{background:var(--prune-fonce);color:#fff;padding:22px 28px 20px;}
+  .wordmark{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;}
+  header h1{margin:6px 0 4px;font-size:23px;font-weight:600;}
+  header p{margin:0;font-size:14px;opacity:.85;}
+  .ident{margin-top:8px !important;display:inline-block;font-size:12.5px;
+         background:rgba(255,255,255,.14);border-radius:14px;padding:3px 12px;}
+
+  .avertissement{background:var(--prune);color:#fff;padding:9px 28px;font-size:12.5px;}
+
+  main{max-width:1180px;margin:0 auto;padding:22px 20px 40px;}
+
+  .barre{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:18px;}
+  .filtre{background:var(--blanc);border:1px solid var(--trame);color:var(--gris);
+          border-radius:18px;padding:6px 14px;font-size:13.5px;cursor:pointer;}
+  .filtre:hover{border-color:var(--accent);}
+  .filtre.actif{background:var(--prune);border-color:var(--prune);color:#fff;}
+  #recherche{flex:1;min-width:200px;padding:7px 12px;border:1px solid var(--trame);
+             border-radius:18px;font-size:13.5px;font-family:inherit;color:var(--gris);}
+  .compteur{width:100%;font-size:12.5px;color:var(--gris-moyen);}
+
+  .grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;}
+
+  .carte{background:var(--blanc);border:1px solid var(--trame);border-radius:8px;
+         border-top:4px solid var(--prune);display:flex;flex-direction:column;}
+  .carte.att{border-top-color:var(--gris-moyen);}
+  .carte-tete{padding:14px 16px 12px;border-bottom:1px solid var(--trame);}
+  .ligne-num{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;}
+  .num{background:var(--prune-clair);color:var(--prune-fonce);font-weight:700;
+       border-radius:5px;padding:2px 9px;font-size:14px;}
+  .pastille{font-size:11px;text-transform:uppercase;letter-spacing:.05em;
+            border-radius:11px;padding:2px 9px;}
+  .p-presentiel{background:var(--prune);color:#fff;}
+  .p-visio{background:var(--accent);color:#fff;}
+  .p-da{background:var(--trame);color:var(--prune-fonce);}
+  .carte h2{margin:0 0 5px;font-size:15.5px;font-weight:600;color:var(--prune-fonce);line-height:1.35;}
+  .meta{font-size:12.5px;color:var(--gris-moyen);margin:0 0 6px;}
+  .resume{font-size:13px;margin:0;color:var(--gris);}
+
+  .corps{padding:12px 16px 14px;flex:1;}
+  .att-bandeau{background:var(--prune-clair);color:var(--prune-fonce);border-radius:6px;
+               padding:9px 11px;font-size:13px;margin-bottom:12px;}
+
+  .ress{display:flex;align-items:center;gap:8px;padding:7px 0;
+        border-bottom:1px dotted var(--trame);font-size:13.5px;}
+  .ress:last-of-type{border-bottom:none;}
+  .ress .lib{flex:1;}
+  .ress a{color:var(--prune);text-decoration:none;font-weight:600;}
+  .ress a:hover{text-decoration:underline;}
+  .vide{color:var(--gris-moyen);font-size:12.5px;font-style:italic;}
+
+  .liens-titre{margin:12px 0 6px;font-size:12px;text-transform:uppercase;
+               letter-spacing:.07em;color:var(--gris-moyen);}
+  .lien{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px;}
+  .lien .lib{flex:1;}
+  .btn{background:var(--blanc);border:1px solid var(--trame);color:var(--prune);
+       border-radius:5px;padding:3px 9px;font-size:12px;cursor:pointer;font-family:inherit;}
+  .btn:hover{border-color:var(--prune);}
+  .btn[disabled]{color:var(--gris-moyen);cursor:default;border-color:var(--trame);opacity:.6;}
+  .btn-tout{width:100%;margin-top:10px;padding:7px;background:var(--prune-clair);
+            border:none;color:var(--prune-fonce);border-radius:6px;font-size:13px;
+            cursor:pointer;font-family:inherit;font-weight:600;}
+  .btn-tout:hover{background:var(--trame);}
+  .btn-tout[disabled]{background:#f2f2f2;color:var(--gris-moyen);cursor:default;font-weight:400;}
+
+  footer{text-align:center;font-size:12px;color:var(--gris-moyen);
+         padding:18px 20px 30px;border-top:1px solid var(--trame);}
+  .copyright{text-align:center;font-size:12px;color:var(--gris-moyen);margin:26px 0 0;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wordmark">TMK Performances</div>
+  <h1>Espace formateur — IOBSP Niveau 2</h1>
+  <p id="sous-titre"></p>
+  <p id="ident" class="ident"></p>
+</header>
+
+<div class="avertissement">
+  Accès réservé aux formateurs habilités par TMK Performances. Supports protégés :
+  toute reproduction, diffusion ou réutilisation hors de la présente action de formation est interdite.
+</div>
+
+<main>
+  <div class="barre">
+    <button class="filtre actif" data-f="tous">Toutes les journées</button>
+    <button class="filtre" data-f="disponible">Kits disponibles</button>
+    <button class="filtre" data-f="presentiel">Présentiel</button>
+    <button class="filtre" data-f="visio">Visio</button>
+    <button class="filtre" data-f="da">Distanciel accompagné</button>
+    <button class="filtre" data-f="a_produire">À produire</button>
+    <input id="recherche" type="search" placeholder="Rechercher une journée, un thème, un intervenant…">
+    <div class="compteur" id="compteur"></div>
+  </div>
+  <div class="grille" id="grille"></div>
+  <p class="copyright">© TMK Performances — supports de formation à usage interne</p>
+</main>
+
+<footer>TMK Performances - N° Siret : 49841924100027 - Code NAF : 8559A</footer>
+
+<script src="ressources.js"></script>
+<script>
+(function(){
+  var LIB = { support:"Support animateur", bookFormateur:"Book formateur",
+              bookStagiaire:"Book stagiaire", deroule:"Déroulé pédagogique",
+              memo:"Fiche mémo" };
+  var ORDRE = ["support","bookFormateur","bookStagiaire","deroule","memo"];
+  var NOM_FORMAT = { presentiel:"Présentiel", visio:"Visio", da:"Distanciel accompagné" };
+  var filtre = "tous", recherche = "";
+  var Q = new URLSearchParams(location.search);
+  var QS = location.search;                        // propagé à chaque document
+  var F = (Q.get("f") || "").trim(), S = (Q.get("s") || "").trim();
+  var JOURS = (Q.get("j") || "").toUpperCase().split(",")
+                .map(function(x){ return x.trim(); }).filter(Boolean);
+
+  document.getElementById("sous-titre").textContent =
+    RESSOURCES.parcours + (RESSOURCES.session ? " · " + RESSOURCES.session : "");
+  document.getElementById("ident").textContent =
+    F ? (F + (S ? " · " + S : "")) : "Exemplaire non nominatif";
+
+  function echappe(t){
+    return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+
+  function lien_qs(url){
+    // n'ajoute les paramètres qu'aux documents internes (liens relatifs)
+    if (!QS || /^https?:/i.test(url)) return "";
+    return url.indexOf("?") === -1 ? QS : QS.replace("?", "&");
+  }
+
+  function ligneRessource(cle, url){
+    var lib = '<span class="lib">' + LIB[cle] + '</span>';
+    var val = url
+      ? '<a href="' + echappe(url + lien_qs(url)) + '" target="_blank" rel="noopener">ouvrir</a>'
+      : '<span class="vide">à renseigner</span>';
+    return '<div class="ress">' + lib + val + '</div>';
+  }
+
+  function ligneLien(l, idx, jIdx){
+    var lib = '<span class="lib">' + echappe(l.libelle) + '</span>';
+    var boutons = l.url
+      ? '<a class="btn" href="' + echappe(l.url + lien_qs(l.url)) + '" target="_blank" rel="noopener">ouvrir</a>' +
+        '<button class="btn" data-copie="' + jIdx + '-' + idx + '">copier</button>'
+      : '<span class="vide">à renseigner</span>';
+    return '<div class="lien">' + lib + boutons + '</div>';
+  }
+
+  function carte(j, jIdx){
+    var att = (j.statut !== "disponible");
+    var h = '<article class="carte' + (att ? ' att' : '') + '">';
+
+    h += '<div class="carte-tete"><div class="ligne-num">' +
+         '<span class="num">' + echappe(j.num) + '</span>' +
+         '<span class="pastille p-' + j.format + '">' + NOM_FORMAT[j.format] + '</span></div>';
+    h += '<h2>' + echappe(j.titre) + '</h2>';
+    var meta = [];
+    if (j.intervenant) meta.push(echappe(j.intervenant));
+    if (j.duree) meta.push(echappe(j.duree));
+    if (meta.length) h += '<p class="meta">' + meta.join(" · ") + '</p>';
+    if (j.resume) h += '<p class="resume">' + echappe(j.resume) + '</p>';
+    h += '</div><div class="corps">';
+
+    if (att) {
+      h += '<div class="att-bandeau">Kit présentiel non disponible à ce jour.</div>';
+    } else {
+      for (var k = 0; k < ORDRE.length; k++) {
+        var cle = ORDRE[k];
+        if (!(cle in j.ressources)) continue;
+        h += ligneRessource(cle, j.ressources[cle]);
+      }
+    }
+
+    var liens = j.liens || [];
+    if (liens.length) {
+      h += '<p class="liens-titre">Liens à envoyer aux stagiaires</p>';
+      for (var i = 0; i < liens.length; i++) h += ligneLien(liens[i], i, jIdx);
+      var dispo = liens.filter(function(l){ return !!l.url; }).length;
+      h += dispo
+        ? '<button class="btn-tout" data-copie-tout="' + jIdx + '">Copier les ' + dispo + ' lien' + (dispo > 1 ? 's' : '') + ' de la journée</button>'
+        : '<button class="btn-tout" disabled>Aucun lien renseigné</button>';
+    }
+
+    return h + '</div></article>';
+  }
+
+  function correspond(j){
+    if (JOURS.length && JOURS.indexOf(j.num.toUpperCase()) === -1) return false;
+    var okFiltre =
+      filtre === "tous" ? true :
+      filtre === "disponible" ? j.statut === "disponible" :
+      filtre === "a_produire" ? j.statut !== "disponible" :
+      j.format === filtre;
+    if (!okFiltre) return false;
+    if (!recherche) return true;
+    var texte = [j.num, j.titre, j.resume, j.intervenant].join(" ").toLowerCase();
+    return texte.indexOf(recherche) !== -1;
+  }
+
+  function rendu(){
+    var html = "", n = 0;
+    RESSOURCES.journees.forEach(function(j, idx){
+      if (correspond(j)) { html += carte(j, idx); n++; }
+    });
+    document.getElementById("grille").innerHTML =
+      html || '<p class="vide">Aucune journée ne correspond à cette recherche.</p>';
+    document.getElementById("compteur").textContent =
+      n + " journée" + (n > 1 ? "s" : "") + " affichée" + (n > 1 ? "s" : "") +
+      " sur " + RESSOURCES.journees.length;
+  }
+
+  function copier(texte, bouton){
+    var fini = function(ok){
+      var initial = bouton.textContent;
+      bouton.textContent = ok ? "copié" : "échec";
+      setTimeout(function(){ bouton.textContent = initial; }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texte).then(function(){ fini(true); }, function(){ fini(false); });
+    } else {
+      var z = document.createElement("textarea");
+      z.value = texte; document.body.appendChild(z); z.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch(e) { ok = false; }
+      document.body.removeChild(z); fini(ok);
+    }
+  }
+
+  document.addEventListener("click", function(e){
+    var b = e.target;
+    if (b.classList && b.classList.contains("filtre")) {
+      document.querySelectorAll(".filtre").forEach(function(x){ x.classList.remove("actif"); });
+      b.classList.add("actif"); filtre = b.getAttribute("data-f"); rendu(); return;
+    }
+    if (b.hasAttribute && b.hasAttribute("data-copie")) {
+      var p = b.getAttribute("data-copie").split("-");
+      copier(RESSOURCES.journees[p[0]].liens[p[1]].url, b); return;
+    }
+    if (b.hasAttribute && b.hasAttribute("data-copie-tout")) {
+      var j = RESSOURCES.journees[b.getAttribute("data-copie-tout")];
+      var t = j.liens.filter(function(l){ return !!l.url; })
+                     .map(function(l){ return l.libelle + " : " + l.url; }).join("\n");
+      copier(j.num + " — " + j.titre + "\n" + t, b); return;
+    }
+  });
+
+  document.getElementById("recherche").addEventListener("input", function(e){
+    recherche = e.target.value.trim().toLowerCase(); rendu();
+  });
+
+  rendu();
+})();
+</script>
+</body>
+</html>
